@@ -1,0 +1,9 @@
+html {
+    font-size: 15px;
+}
+
+.abs-units, .rel-units {
+    box-sizing: border-box;
+    border: solid 3px black;
+    padding: 3px;
+}

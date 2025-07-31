@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_입력.html</title>
+</head>
+<body>
+
+    <h3>#input</h3>
+
+    <ul>
+        <li>input 태그를 사용해 사용자로부터 다양한 입력을 받을 수 있다</li>
+        <li>input 태그의 type 속성으로 어떻게 입력받을지 결정할 수 있다</li>
+        <li>input 태그의 value 속성에 값을 설정해 놓으면 기본값이 설정된다</li>
+        <li>input 태그의 piaceholder 속성의 값은 무엇을 입력해야하는지 알려준다</li>
+        <li>input 태그의 readonly 속성을 추가해놓으면 읽기 전용이 된다</li>
+        <li>input 태그에 disabled 속성을 추가해놓으면 비활성화 된다</li>
+    </ul>
+
+    <table border="3">
+        <tr>
+            <th>타입</th>
+            <th>예시</th>
+            <th>설명</th>
+        </tr>
+        <tr>
+            <td>type="text"</td>
+            <td>
+                <input type="text" placeholder="아이디를 입력해주세요" value="abc123">
+                <input type="submit" value="확인">
+            </td>
+            <td>일반적인 텍스트를 입력하는 곳</td>
+        </tr>
+        <tr>일반적인 텍스트</tr>
+        <tr>
+            <td>type="number"</td>
+            <td><input type = "number" value = "20" readonly>
+            <input type="submit" value="결정">
+            </td>
+            <td>숫자를 입력하는 곳</td>
+            
+        </tr>
+        <tr>
+            <td>type="password"</td>
+            <td><input type="password">
+                <input type="submit" value = "비밀번호확인">
+            </td>
+            
+            <td>비밀번호를 입력할 수 있는 곳 (비밀번호를 가려준다)</td>
+        </tr>
+        <tr>
+            <td>type="checkbox"</td>
+            <td>
+                <b>관심 분야</b> <br>
+                <input type = "checkbox" name = "interest" id="movie" > 
+                <label for = "movie">영화</label> <br>
+                <input type = "checkbox" name = "interest" id="music"> 
+                <label for = "music">음악</label> <br>
+                <input type = "checkbox" name = "interest" id ="reading"> 
+                <label for = "reading">독서</label> <br>
+                <input type = "checkbox" name = "interest" id = "luxury"> 
+                <label for = "luxury">사치</label> <br>
+                <input type = "checkbox" name = "interest" id = "drink" disabled>
+                <label for = "drink">음주가무</label> <br>
+                <input submit="submit value"> 설정
+            </td>
+            <td>같은 카테고리 내에서 여러가지 선택 할 수 있는 버튼</td>
+        </tr>
+        <tr>
+            <td>type = "radio"</td>
+            <td>
+                <b>맛을 선택하시오</b><br>
+                <input type = "radio" name="flavor"> 딸기
+                <input type = "radio" name="flavor"> 바닐라
+                <input type = "radio" name="flavor"> 초코
+                <input type = "submit" value = "선택">
+            </td>
+            <td>같은 카테고리 내에서 하나만 선택할 수 있는 버튼</td>
+        </tr>
+        <tr>
+            <td>type="color"</td>
+            <td><input type="color"></td>
+            <td>색상을 선택할 수 있다</td>
+        </tr>
+        <tr>
+            <td>type = "date"</td>
+            <td><input type = "date"></td>
+            <td>날짜를 선택할 수 있다</td>
+        </tr>
+        <tr>
+            <td>type="file"</td>
+            <td><input type ="file"></td>
+            <td>사용자의 컴퓨터에서 원하는 파일을 선택한다</td>
+        </tr>
+        <tr>
+            <td>type= "hidden"</td>
+            <td><input type = "hidden" name="employee_id" value="135"></td>
+            <td>사용자에게는 보여지지 않는 상태로 데이터를 보관하기 위해 사용한다</td>
+        </tr>
+        <tr>
+            <td>&lt;textarea&gt;</td>
+            <td>
+                <textarea cols="40" rows="8"></textarea>
+            </td>
+            <td>많은 양의 텍스트를 입력하기 위해 사용하는 태그</td>
+        </tr>
+        <tr>
+            <td>&lt;select&gt;, &lt;option&gt;</td>
+            <td>
+                <select>
+                    <option value="question">질문</option>
+                    <option value="notice">공지</option>
+                    <option value="greetings">가입인사</option>
+                </select>
+            </td>
+            <td>주어진 항목들 중 하나를 선택할 수 있는  태그</td>
+        </tr>
+    </table>
+
+    <!--입력을 받을 수 있는 태그들은 폼단위로 묶어서 사용해야 한다-->
+    <form id = "loginForm">
+        아이디 <input type = "text"><br>
+        비밀번호 <input type = "password" name = "user_password"><br>
+        <input type="submit" value="로그인">
+        <input type="reset" value="취소">
+    </form>
+
+</body>
+</html>

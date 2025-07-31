@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14_Float.html</title>
+    <link rel="stylesheet" href="stylesheet/css14.css">
+</head>
+
+<body>
+    <h3># 14_Float</h3>
+
+    <ul>
+        <li>다른 내용들이 float이 설정된 요소를 비켜가게 만드는 속성</li>
+        <li>float이 설정된 요소는 냇가에 박혀있는 돌 같은 느낌이 든다</li>
+    </ul>
+
+    <h5># float: left</h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam veritatis minus amet quis distinctio delectus nulla aperiam eligendi unde beatae debitis modi, in, vero ratione exercitationem nobis suscipit nam cum?
+        <img class="article-img float-left" src="./images/다운로드.jpg" alt="사과">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt officiis temporibus tempore sint ab deserunt quisquam, eius ullam odit, nobis sit placeat, fugiat consequuntur ducimus earum. Commodi veniam cupiditate illo.
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sit, possimus. Doloribus inventore deserunt ipsam nesciunt, quaerat quasi? Quidem ut, nulla quo distinctio eos optio, obcaecati accusantium voluptatem quas eaque earum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dicta dolorum tempora quas, consectetur saepe deserunt nam sequi. Quaerat debitis voluptas asperiores obcaecati voluptatum itaque illo error quam esse numquam.
+    </div>
+
+    <h3># clear 속성 사용하기</h3>
+
+    <ul>
+        <li>clear: left - 해당 요소의 왼쪽에 float 요소를 올 수 없게 만든다</li>
+        <li>clear: right - 해당 요소의 오른쪽에 float 요소를 올 수 없게 만든다</li>
+        <li>clea: both -  해당 요소 양쪽에 float 요소를 올 수 없게 만든다</li>
+
+    </ul>
+
+    <h5>
+        # 컨텐츠의 양이 충분하지 않은 경우 float 요소의 박스를 벗어나게 된다
+        (해당 방향 clear를 통해 해결할 수 있다)
+    </h5>
+    <h5># float: right</h5>
+    <div class="article">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam veritatis minus amet quis distinctio delectus nulla aperiam eligendi unde beatae debitis modi, in, vero ratione exercitationem nobis suscipit nam cum?
+        <img class="article-img float-right" src="./images/다운로드.jpg" alt="사과">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt officiis temporibus tempore sint ab deserunt quisquam, eius ullam odit, nobis sit placeat, fugiat consequuntur ducimus earum. Commodi veniam cupiditate illo.
+        Lorem ipsum dolor sit, amet consectetur adipisicing eli. Sit, possimus. Doloribus inventore deserunt ipsam nesciunt, quaerat quasi? Quidem ut, nulla quo distinctio eos optio, obcaecati accusantium voluptatem quas eaque earum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem dticta dolorum tempora quas, consectetur saepe deserunt nam sequi. Quaerat debitis voluptas asperiores obcaecati voluptatum itaque illo error quam esse numquam.
+        <div style="clear: right;"></div>
+    </div>
+
+    <h5>
+    # 컨텐츠의 양이 충분하지 않은 경우 float 요소의 박스를 벗어나게 된다2
+    (float 요소들이 겹치는 것도 clear로 해결할 수 있다)
+    </h5>
+
+    <div class="article">
+        <img class="article-img float-right" src="./images/다운로드.jpg" alt="사과">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam veritatis minus amet quis distinctio delectus nulla aperiam eligendi unde beatae debitis modi, in, vero ratione exercitationem nobis suscipit nam cum?
+        <div style="clear:right;border: 1px solid black; height: 10px;"></div>
+        <img class="article-img float-left" src="./images/다운로드.jpg" alt="사과">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam veritatis minus amet quis distinctio delectus nulla aperiam eligendi unde beatae debitis modi, in, vero ratione exercitationem nobis suscipit nam cum?
+        <div style="clear: left;"></div>
+    </div>
+
+    <h3># float 악용하기</h3>
+
+    <h5>
+        #여러 요소를 같은 방향 float으로 설정하면 쌓을 수 있다
+    </h5>
+    <div id="float-box1">
+        <img id="float-image1" src="./images/다운로드.jpg">
+        <img id="float-image3" src="./images/다운로드.jpg">
+        <img id="float-image2" src="./images/고양이발바닥.jpg">
+        <div style="clear: both";></div>
+    </div>
+    
+    <h5>이를 악용하여 float을 통해 판매하는</h5>
+    <div id="float-box2">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+
+    </div>
+
+    <h3># 연습문제</h3>
+    <div id="book_info">
+        <div class="badge_list_box">
+            <b class="badge_line_navy">2025년 07월 25일 오늘의 선택</b>
+            <b class="badge_line_navy">MD의 선택</b>
+            <b class="badge_line_navy">무료배송</b> <br>
+            <b class="badge_line_gray">사은품</b>
+            <b class="badge_line_gray">소득공제</b>
+        </div>
+        <div class="price_box">
+            <b class="percent">10%</b>
+            <b class="sale_price">19,800원</b>
+            <b class="price">22,000원</b>
+        </div>
+        <div class="point_box">
+            <div class="point_label">적립/혜택</div>
+            <div class="point_text">
+                1,100P
+                <img src="./images/아래.jpg">
+            </div>
+        </div>
+        <div class="delivery_box">
+            <div class="delivery_info">배송안내</div>
+            <div class="free_delivery">
+                무료 배송
+                <img src="./images/i.jpg">
+            </div>
+            <div class="midnight_delivery">새벽배송</div>
+            <div class="arrived_time">내일(7/29,화 오전 7시 전) 도착 
+                <img src="./images/물음표.jpg">
+            </div>
+            <div class="default_delivery">
+                기본배송지 기준
+                <img src="./images/i.jpg">
+            </div>
+        </div>
+        <div class="login_info_box">
+            <b class="login-text">로그인</b>
+            <b class="after-text"> 후 </b>
+            <b class="info-text">정확한 배송지 안내</b>
+            <b class="text-of-login">를 받아보세요!</b>
+        </div>
+
+        <div class="alrim-box">
+            <div class="alrim-text">알림 신청하시면 원하시는 정보를 <br>
+                받아 보실 수 있습니다.
+            </div>
+            
+        </div>
+        <div class="alrim-sinchung">알림신청<br></div>
+        <div class="location">
+            <img src="./images/위치아이콘.jpg">
+            매장 재고,위치
+        </div>
+
+        <div class="bottom-box">
+            <div class="alripnida">알립니다</div>
+            <div class="sulmyung">1. 초판 한정 작가 친필 메시지와 사인 인쇄<br>
+                 2. 이 책 포함 소설 2만원↑ 구매 시 
+                 40주년 타월 선택(매장, 바로드림 구매 시 제외)</div>
+        </div>
+    </div>
+
+</body>
+</html>

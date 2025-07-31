@@ -1,0 +1,66 @@
+.margin-test-box, [id*="padding-box"] {
+    width: 500px;
+    height: 200px;
+    border : solid 3px black;
+    font-size: 50px;
+}
+
+[id*="padding-box"] {
+    font-size: 1.0rem;
+    text-align:justify;
+}
+
+#padding-box1 {
+    padding: 50px;
+}
+
+#padding-box2 {
+    padding: 100px 50px;
+}
+
+.margin-test-box:first-of-type {
+    margin-left: 50px;
+    margin-bottom: 30px;
+    margin-top: 150px;
+}
+
+.margin-test-box:nth-of-type(2) {
+    margin: auto;
+    margin-top: 30px; /* 더 큰놈만 결정된다 */
+}
+
+.margin-test-box:nth-of-type(3) {
+    margin: 30px 150px 50px 100px; /* 상/우/하/좌 */
+}
+
+body {
+    border: solid 1px black;
+}
+
+#box1 {
+    /* 
+        box-sizing: content-box (기본값)
+        width와 height 속성이 content-box의 크기를 설정하게 됨
+    */
+    box-sizing: content-box;
+    width: 150px;
+    height: 150px;
+
+    border: solid 15px black;
+    padding: 30px;
+    margin: 10px auto;
+}
+
+#box2 {
+    /* 
+        box-sizing: border-box (기본값)
+        width와 height 속성이 요소의 전체 크기를 설정하게 됨
+    */
+    box-sizing: border-box;
+    width: 150px;
+    height: 150px;
+
+    border: solid 15px black;
+    padding: 30px;
+    margin: 10px auto;
+}
