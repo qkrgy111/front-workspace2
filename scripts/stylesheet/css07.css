@@ -1,0 +1,10 @@
+.important {
+    text-decoration: underline 3px solid black;
+    font-size: 25px;
+    color: red;
+}
+
+.bg-yellow {
+    background-color: goldenrod;
+}
+
