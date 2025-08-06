@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11_배열.html</title>
+</head>
+<body>
+    
+    <h3># 자바스크립트 스타일로 배열 다루기</h3>
+
+    <p>F12</p>
+
+    <script>
+        // 빈 배열 만들기
+        const drinks = [];
+
+        // const로 배열을 선언하더라도 내용은 변경이 가능하다
+        drinks[0] = 'orange juice';
+        drinks[1] = 'sprite';
+        
+        // const이기 때문에 drinks 자체를 새로운 배열로 변경하는 것은 불가능하다
+        // drinks = ['orange juice', 'sprite'];
+
+        console.log(drinks);
+        console.log(drinks.toString());
+
+        // 배열에 값 추가/삭제하는 메서드들 : push, pop, shift, unshift
+
+        //push : 배열 맨 뒤에 추가하기
+        drinks.push('coke', 'cafe latte', 'americano');
+
+        //pop: 배열 맨뒤의 값 꺼내기 (삭제됨)
+        console.log('popped : ', drinks.pop());
+        console.log(drinks);
+
+        // shift: 배열 맨 앞의 값 꺼내기
+        console.log('shifted : ', drinks.shift());
+
+        // unshift: 배열 맨 앞에 값 추가하기
+        console.log(drinks.unshift('chocolate latte', 'vanilla latte'));
+        console.log(drinks);
+
+        console.log(...drinks);
+
+        const items = ['sword', 'shield', 'fork', ...drinks];
+
+        console.log(items); 
+
+        // 배열 복사? (얕은 복사)
+        const drinks2 = drinks;
+
+        drinks2[3] = '인절미';
+
+        console.log(drinks[3]);
+
+        // 깊은 복사
+        const drinks3 = [...drinks];
+
+        drinks3[2] = '람보르기니';
+
+        console.log(drinks[2]);
+
+        console.log('환타 있나요 ? ', drinks.includes('환타'));
+
+        // sort : 기본적으로 사전순으로 정렬을 함
+        // 직접 Comparator를 정의해야 한다
+        const numbers = [1, -5, 99, 123, 123456, -888, 33, -7777, 15];
+
+        function compareFn(left, right) {
+            return left - right;
+        }
+
+        numbers.sort(compareFn);
+        console.log(numbers);
+
+
+        // 연습1 : 1 ~ 100 범위의 랜덤 숫자 100개를 배열에 추가한 후 내림차순으로 정렬해보기
+        const ranNums = [];
+        
+        for (let i = 0; i < 200; ++i) {
+            ranNums.push(parseInt(Math.random() * 100 + 1));
+        }
+
+        ranNums.sort((a, b) => b - a);
+        console.log(ranNums);
+
+        // 연습2 : 각 숫자의 개수를 세고 가장 많이 나온 숫자 순으로 정렬하여 출력해보기
+
+        const numCount = [];
+
+        // 어떤 숫자가 몇 번 등장했는지 세기 위해 오브젝트를 사용
+        for (let i = 0; i < 100; i++) {
+            numCount[i] = {
+                num: i + 1,
+                count: 0
+            };
+        }
+        
+        // 횟수 세기
+        for (let i = 0; i < ranNums.length; ++i) {
+            const n = ranNums[i];
+
+            numCount[n - 1].count++;
+        }
+
+        // 오브젝트에 저장된 횟수를 기준으로 정렬
+        numCount.sort((a, b) => {
+            return b.count - a.count;
+        });
+        
+        console.log(numCount);
+        
+
+        // console.log(`숫자 ${n}이 등장한 횟수 : ${numCount[i]}`);
+
+        // const rn = [];
+
+        // for (let i = 0; i < 200; i++) {
+
+        //     let number = parseInt(Math.random() * 100 + 1);
+        //     rn.push(number);
+        // }
+        
+        // rn.sort(compareFn);
+
+        // console.log(rn);
+
+        // let count;
+        // const num = [];
+
+
+        // for (let i = 0; i < rn.length; i++) {
+        //     for (let j = 0; j < rn.length; j++) {
+        //         if (rn[i] === rn[j]) {
+        //             count++;
+        //         }
+        //     }
+        //     console.log(rn[i] + ' = ' + count + '번');
+        //     num.push(rn[i], count);
+        //     count = 0;
+        // }
+
+        // console.log(num);
+
+
+
+
+    </script>
+</body>
+</html>

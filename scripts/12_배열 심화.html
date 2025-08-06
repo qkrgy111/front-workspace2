@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12_배열 심화.html</title>
+</head>
+<body>
+
+    <h3># 배열 멋있게 다루기</h3>
+
+     <style>
+        table {
+        width: 100%;
+        }
+
+        th, td {
+        border: 1px solid #999;
+        padding: 8px;
+        text-align: center;
+        }
+
+        .low-score {
+        color: red;
+        }
+    </style>
+    <div id = studentsTable>
+    </div>
+
+    <script>
+        const arr = [1, 2, 3, 4, 5, 6];
+
+        // 배열.forEach(실행할 함수(콜백)) : 배열의 모든 값을 활용하여 전달한 함수를 실행한다
+        arr.forEach((value, indexs, original) => {
+            console.log (`값은 ${value} 이고, ${indexs}번째 요소입니다` );
+            console.log(`원본 배열은 ${original}입니다`);
+        });
+
+        const scores = [90, 91, 30, 75, 88, 45, 96, 70];
+
+        // 배열.map(콜백) : 배열의 각 값으로 콜백을 실행한 결과로 이루어진 새 배열을 반환
+
+        const examResult = scores.map(score => score > 60 ? 'pass': 'fail');
+
+        console.log(examResult);
+
+        // 연습 : scores 배열로 grades 배열을 생성해보세요
+
+        const gradeResult = scores.map(score => {
+            if (score > 100) {
+                return'F';
+            } else if (score >= 90) {
+                return 'A';
+            } else if (score >= 80) {
+                return 'B';
+            } else if (score >= 70) {
+                return 'C';
+            } else if (score >= 60) {
+                return 'D';
+            } else {
+                return 'F';
+            }
+        });
+
+        console.log(gradeResult);
+        // const gradeResult = scores.map ((score)=> {
+        //     if (score > 90) {
+        //         return 'a';
+        //     } else if (score > 80) {
+        //         return 'b';
+        //     } else if (score > 70) {
+        //         return 'c';
+        //     } else if (score > 60) {
+        //         return 'd';
+        //     } else {
+        //         return 'false';
+        //     }
+        // });
+        // console.log(gradeResult);
+
+        // 연습2: 다음 객체 배열을 통해 평균 점수를 추가한 새로운 배열을 만들어보세요
+        const students = [
+            {
+                name: '유재석',
+                kor : 90,
+                eng: 88,
+                math: 80
+            },
+            {
+                name: '빌 게이츠',
+                kor: 15,
+                eng: 100,
+                math: 99
+            },
+            {
+                name: '마이클 조던',
+                kor: 33,
+                eng: 45,
+                math: 70
+            }
+        ]
+
+        //
+        const getTotal = stu => stu.kor + stu.eng + stu.math;
+        const getAvg = stu => getTotal(stu) / 3;
+
+        // ...으로 배열뿐만 아니라 객체도 풀어서 사용할 수 있다
+        // 화살표 함수의 리턴 축약 버전으로 객체를 리턴하기 위해서는 {}괄호로 감싸주어야 한다
+        const students2 = students.map(stu => ({
+                ...stu,
+                avg: parseInt(getAvg(stu)),
+                total : getTotal(stu)
+            
+        }));
+
+        console.log(students2);
+
+
+        // const plusAvg = students.map(student => {
+        //     const avg = (kor + eng + math) / 3;
+             
+        // });
+
+        // console.log(plusAvg);
+
+
+        console.log(students2);
+
+
+        const snacks = ['초코파이', '엄마손파이', '포테이토칩', '포카칩', '웰치스', '제로콜라',
+            '초코하임', '치토스'];
+        
+            const pies = snacks.filter(snack => snack.endsWith('파이'));
+            console.log(pies);
+
+            // 배열을 리턴하는 메서드의 경우 이렇게 인쇄적으로 활용할 수 있따(메서드 체이닝)
+            snacks
+            .filter(snack=>snack.endsWith('칩'))
+            .forEach(snack => console.log('남은 과자 : ', snack));
+
+            // 배열.reduce(롤백) : 배열의 모든 값을 활용하여 하나의 결과를 도출해내기 위해 사용한다
+            // 쿨백의 첫 번째 인자로는 누적값이 오고 두 번째인자로는 현재 값이 온다.
+            scores.reduce((acc, curr, index, original) => {
+                console.log('acc', acc);
+                console.log('curr', curr);
+                console.log('index', index);
+                console.log('original', original);
+
+                return acc + curr; // 여기서 리턴하는 값이 계속 누적된다
+            });
+
+            const bestScore = scores.reduce((acc, curr) => acc < curr ? curr : acc);
+            console.log('최고점수:', bestScore);
+
+            /*
+                (1) 학번, 이름, 국어, 영어, 수학, 수업 만족도 (별 0 ~ 5)를 가진
+                    학생 100명의 자바스크립트 오브젝트를 랜덤으로 생성하기
+                
+                (2) 모든 학생들의 정보를 HTML에 테이블 형태로 출력하기
+                    (60점 미만인 점수는 빨간 글씨로 출력하기, 학생들의 수업 만족도는 별의 개수로 출력하기)
+
+                (3) 모든 학생들의 평균 점수를 테이블 형태로 출력하기
+
+                (4) 수학 점수가 60점 미만인 학생들로 이루어진 테이블 HTML에 출력하기
+
+                (5) 2번 문제의 마지막 행에는 각 열의 총합과 평균을 출력하기 (학번, 이름 제외)
+            */
+
+            
+
+
+
+            
+
+
+        const lastNames = [
+            '김', '이', '박', '최', '정', '강', '조', '윤', '장', '임',
+            '오', '한', '신', '서', '권', '황', '안', '송', '류', '홍',
+            '전', '고', '문', '양', '손', '배', '백', '남궁', '노', '나'
+        ];
+
+        const firstNames = [
+            '지민', '서준', '하늘', '민지', '도윤', '유나', '수빈', '예린', '현우', '지우',
+            '태민', '서현', '시우', '하윤', '예준', '세은', '다은', '하진', '은우', '시현',
+            '주원', '유진', '은비', '채원', '승민', '서진', '지안', '나윤', '지원', '예서',
+            '지현', '하람', '성민', '다현', '가은', '재윤', '도현', '지수', '수현', '정우',
+            '보민', '지후', '유림', '예린', '세진', '민석', '은정', '다인', '태희', '연우'
+        ];
+        
+        function getRandomScore() {
+            return parseInt(Math.random() * 100 + 1);
+        }
+
+        function fullName() {
+            const lastName = lastNames[parseInt(Math.random() * lastNames.length)];
+            const firstName = firstNames[parseInt(Math.random() * firstNames.length)];
+            return lastName + firstName;
+        }
+
+        function getStarsNum() {
+            return parseInt(Math.random() * 5);
+        }
+
+        const studentsInfo = [];
+
+        for (let i = 0; i < 100; i++) {
+            const studentInfo = {
+                studentId: i + 1,
+                studentName : fullName(),
+                studentKorean : getRandomScore(),
+                studentEng : getRandomScore(),
+                studentMath : getRandomScore(),
+                studentStars : getStarsNum(),
+            }
+            studentsInfo.push(studentInfo);
+        }
+
+        console.log(studentsInfo);
+
+        let html = "<table>";
+        html += `
+        <tr>
+            <th>학번</th>
+            <th>이름</th>
+            <th>국어</th>
+            <th>영어</th>
+            <th>수학</th>
+            <th>만족도</th>
+        </tr>
+        `;
+
+        for (const s of studentsInfo) {
+        html += "<tr>";
+        html += `<td>${s.studentId}</td>`;
+        html += `<td>${s.studentName}</td>`;
+        html += `<td class="${s.studentKorean < 60 ? 'low-score' : ''}">${s.studentKorean}</td>`;
+        html += `<td class="${s.studentEng < 60 ? 'low-score' : ''}">${s.studentEng}</td>`;
+        html += `<td class="${s.studentMath < 60 ? 'low-score' : ''}">${s.studentMath}</td>`;
+        html += `<td>${'★'.repeat(s.studentStars)}</td>`;
+        html += "</tr>";
+        }
+
+        html += "</table>";
+
+        document.getElementById("studentsTable").innerHTML = html;
+
+        const total = student2 => student2.studentKorean + student2.studentEng + student2.studentMath;
+        const Average = student2 => total(student2) / 3;
+
+            
+    </script>
+    
+</body>
+</html>

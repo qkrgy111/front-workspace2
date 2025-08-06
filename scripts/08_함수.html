@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08_함수.html</title>
+</head>
+<body>
+
+    <h3># 자바스크립트에서 함수 사용하기</h3>
+    <ul>
+        <li>function 키워드를 사용해 함수를 선언할 수 있다</li>
+        <li>선언한 함수를 ()를 붙이지 않고 활용할 수 있다</li>
+        <li>함수 이름 뒤에 ()를 붙여 호출하면 해당 함수의 실행 결과를 리턴하고
+            ()를 붙이지 않고 사용하면 함수 자체를 전달하는 것이 된다
+        </li>
+        <li>리턴 타입을 적지 않아도 값을 리턴할 수 있다</li>
+        <li>자바스크립트는 변수에 함수를 저장할 수 있다</li>
+    </ul>
+    
+
+    <h3># 자바스크립트 함수의 종류</h3>
+
+    <ul>
+        <li>function으로 선언하는 함수</li>
+        <li>함수 표현식: 변수에 함수를 담아서 사용하는 함수</li>
+        <li>화살표 함수 : 함수 표현식을 좀 더 멋있고 간편하다 사용하기 위한 함수</li>
+    </ul>
+
+    
+
+    <script>
+
+        function abc(a,b) {
+            return a + b;
+        }
+
+        function 전달받은함수를실행하는함수(a) {
+            console.log(a(2, 3));
+        }
+
+        전달받은함수를실행하는함수(abc);   
+
+        // 함수를 실행하여 결과를 얻어낼수도 있고, 함수 자체를 전달할 수도 있다
+        console.log(abc(10, 11));
+        console.log(abc);
+
+        // 선언한 함수를 변수에 저장할 수도 있다
+        // 선언할 때 사용한 이름은 찾지 사용하지 못하기 때문에 안적어도 된다(익명)
+        // => 이렇게 함수를 선언해서 사용하는 것을 함수 표현식이라고 한다
+        const f = function abc2() {
+            console.log('나는 abc2다');
+        }
+
+        // 함수를 다른 변수에 전달해줄수도 있다
+        const g = f;
+
+        f();
+        g();
+
+        // function키워드로 선언한 함수들은 아래에 있어도 실행이 가능하다
+        conform();
+        cancel();
+        // question(); 함수가 밑에 있어서 실행 안됨 (함수 표현식)
+
+        // 함수 선언은  코드의 진행보다 먼저 실행되기 때문에 밑에 있어도 상관 없다
+        // 함수가 아래있어도 위에서 사용할수있다 (호이스팅, Hoisting)
+        function conform() {
+            console.log('확인');
+        }
+
+        function cancel() {
+            console.log('취소');
+        }
+
+        // 함수 표현식은 순서를 거스를 수 없다 (변수 선언이기 때문에)
+        // (변수 선언의 경우에 선언은 호이스팅되지만 대입은 호이스팅되지 않는다)
+        const question = function () {
+            console.log('정말 하시겠습니까?');
+        };
+
+        // 화살표 함수 (function 대신 =>를 사용)
+        const kick = () => {
+            console.log('강퇴');
+        };
+
+        kick();
+
+        // 한 줄 짜리 함수는 {}생략이 가능하다
+        // 매개변수가 하나라면 () 생략이 가능하다
+
+        const ban = (name, period) => 
+            console.log(`'${name}'님을 ${period}일 동안 차단했습니다`);
+
+        const sub = (name, period) =>
+            console.log(`'${name}'님을 ${period}일 동안 구독했습니다`);
+
+        const userManagement = (name, period, action) => action(name, period);
+        
+
+        userManagement('김말이', 20, ban);
+        userManagement('떡볶이', 35, sub);
+        
+        // 함수와 오브젝트 함께 사용하기
+        // 오브젝트 내부에 함수를 정의할 때 화살표 함수를 사용하면 this가 안먹히게 된다
+        const Car = {
+            name: '레이',
+            cost: 14000000,
+            efficiency: 12.9,
+            displacement: 998,
+            move: function () {
+                console.log(`연비${this.efficiency}km의 ${this.name}가 굴러갑니다`);
+            },
+        };
+
+        Car.move();
+
+        // 다음 홤수를 화살표 함수로 변경해보세요 
+        const ask = (work, yes, no) => {
+            // window.confirm() : 확인창 띄우는 메서드
+            if (window.confirm(work)) {
+                yes();
+            } else {
+                no();
+            }
+        }
+
+        ask (
+            '시험지를 제출하시겠습니까?',
+            () => { alert('시험지가 제출되었습니다');},
+            () => { alert('취소 버튼을 누르셨습니다');}
+        );
+
+
+
+        /*
+	  	# 다음 함수를 정의하고 올바르게 동작하는지 테스트 해보세요
+	  	
+	  	 1. 전달한 문자가 알파벳이면 true를 반환, 아니면 false를 반환하는 함수	  	 
+	  	 2. 전달한 숫자가 3의 배수이면 true를 반환, 아니면 false를 반환하는 함수	  	 
+	  	 3. 숫자를 하나 전달하면 문자열 "짝수입니다" 또는 "홀수입니다"를 반환하는 함수	  	 
+	  	 4. 숫자를 전달하면 해당 숫자의 모든 약수를 배열로 반환하는 함수	  	 
+	  	 5. 전달한 정수가 소수라면 true를 반환하고 아니면 false를 반환하는 함수	  	 
+	  	 6. 메세지와 횟수를 전달하면 해당 메세지를 전달한 횟수만큼 반복하는 함수 
+	*/
+
+    
+    // console.log(num1 !== num3);
+
+    // console.log('자동차' < '비행기');
+
+    // 함수가 단 한줄이어서 {}를 생햑할 때 리턴도 생략이 가능하다
+    const isAlphabet = ch => ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z';
+    console.log('K가 알파벳이냐 ?',  isAlphabet('K'));
+
+    const isMul3 = num => num % 3 == 0;
+    const evenOrOdd = num => num % 2 == 0 ? '짝수입니다' : '홀수입니다';
+
+    const isDiVidor = (num, d) => num % d == 0;
+
+    const getAllDivisors = num => {
+        const arr = [];
+        let count = 0;
+
+        for (let i = 1; i <= num; ++i) {
+            if (isDivisor(num, i)) {
+                arr[count++] = i;
+            }
+        }
+        return arr;
+    };
+    
+    console.log(getAllDivisors(10));
+
+    const isPrime = num => getAllDivisors(num).length == 2;
+
+    const repeatMessage = (message, repeat) => {
+        for (let i = 0; i < repeat; i++) {
+            console.log(message);
+        }
+    }
+
+
+
+    function alpabet(word) {
+    (word >= 'A' && word <= 'Z') || (word >= 'a' && word <= 'z');
+    }
+
+    console.log(alpabet('a'));
+
+    function three(num) {
+        if (num == 0) {
+            return false;
+        } else if (num % 3 == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    console.log(three(3));
+
+    function chkEvenOdd2(num1) {
+        if (num1 % 2 == 0) {
+            return console.log('짝수입니다');
+        } else {
+            return console.log('홀수입니다');
+        }
+    }
+
+    console.log(chkEvenOdd2(0));
+
+    function getDivisors2(num2) {
+        const yaksoo = [];
+        const count = 0;
+        for (i = 1; i <= num2; i++) {
+            if (num2 % i == 0) {
+                count++;
+                yaksoo[count] = i; 
+            }
+        }
+    }
+    function getDivisors2(num2) {
+    const yaksoo = [];
+    for (let i = 1; i <= num2; i++) {
+        if (num2 % i === 0) {
+            yaksoo.push(i); 
+        }
+    }
+    return yaksoo;
+}
+// 1, 2, 5, 10
+    console.log(getDivisors2(10));
+
+    function isPrime(num3) {
+		if (Math.abs(num3) < 2) {
+			return false;
+		}
+		
+		for ( i = 2; i <= Math.sqrt(num3); ++i) {
+			if (num % i == 0) {
+				return false;
+			}
+		}
+		return true;
+    }
+    
+    console.log(isPrime2(3));
+
+    function repeatMessage2(message, num4) {
+		for (i = 0; i < num4; ++i) {
+			console.log(message);
+		}
+	}
+
+    repeatMessage2('안녕', 4);
+
+    
+    </script>
+</body>
+</html>
