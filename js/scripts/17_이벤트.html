@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17_이벤트.html</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #box1 {
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            border: solid 3px black;
+        }
+
+        #box1.red {
+            background-color: red;
+        }
+
+        #tic-tac-toe {
+            display: grid; 
+            grid-template-columns: 1fr 1fr 1fr; 
+            grid-template-rows: 1fr 1fr 1fr; 
+            border: 1px solid black;
+            width: 300px;
+            height: 300px;
+        }
+
+        #tic-tac-toe > div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            font-size: large;
+            color: white;
+        }
+
+        #box2, #box2 div {
+            padding: 15px;
+            border: solid 3px black;
+            min-height: 100px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    <h3># HTML의 이벤트 속성</h3>
+
+    <ul onclick="console.log('ㅎㅇ');"> 
+        <li>
+            앞에 on이 붙는 HTML속성들은 자바스크립트 이벤트 속성이다
+            (onclick, onmouseover, onkeydown, onfocus, onmouseleave ...)
+        </li>
+        <li>
+            해당 이벤트 속성에 콜백을 달아두면 이벤트 정보를 담고있는 이벤트 객체가 넘어오면서
+            이벤트가 발생하게 된다
+        </li>
+        <li>해당 요소의 HTML속성에는 자바스크립트 문법을 값으로 사용할 수 있다</li>
+        <li>
+            또는 해당 요소를 자바스크립트에서 선택하여 addEventListener() 메서드를 통해
+            해당 이벤트에 대한 콜백 함수를 추가해 둘 수 있다
+        </li>
+    </ul>
+    
+    <div id="box1"></div>
+        
+    <div id="tic-tac-toe"></div>
+    <button id="resetBtn">초기화</button>
+
+    <h3># 이벤트 위임</h3>
+
+    <ul>
+        <li>기본적으로 부모 요소에 추가한 이벤트는 그 위에 놓여있는 자식 요소에서도 발동한다</li>
+    </ul>
+
+    <div id="box2">
+        <div>
+            <div>
+                <div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const box1 = document.getElementById('box1');
+
+        box1.addEventListener('click', (e) => {
+            // console.log(e);
+            box1.classList.toggle('red');
+        });
+
+        box1.addEventListener('mouseleave', (e) => {
+            box1.classList.toggle('red');
+        });
+
+        // 연습1 : id가 tic-tac-toe인 요소를 클릭할때마다 
+        //         O와 X가 번갈아가면서 하나씩 생기게 만들어주세요
+        //         (단, 이미 O 또는 X가 생성된 칸은 바꿀 수 없음)
+        // 연습2 : 초기화 버튼을 누르면 모든 단계가 초기화되고 다시 클릭을 진행할 수 있게 만들어보세요
+
+        const tictactoe = document.getElementById('tic-tac-toe');
+        let space = '';
+        for (let i = 0; i < 9; i++) {
+            space += '<div></div>'
+        }
+        tictactoe.innerHTML += space;
+
+        const tictactoeClick = document.querySelectorAll('#tic-tac-toe > div');
+
+        let count = 1;
+        for (let i = 0; i < tictactoeClick.length; i++) {
+            tictactoeClick[i].addEventListener('click', (e) => {
+                if (tictactoeClick[i].textContent === '') {
+                    if (count % 2 == 0) {
+                        tictactoeClick[i].innerHTML = 'X';
+                        ++count;
+                    } else {
+                        tictactoeClick[i].innerHTML = 'O';
+                        ++count;
+                    }
+                }
+
+                if (tictactoeClick[i].textContent === 'X') {
+                    tictactoeClick[i].style.backgroundColor = 'rgb(255, 128, 128)';
+                } else {
+                    tictactoeClick[i].style.backgroundColor = 'rgb(154, 235, 255)';
+                }
+            })
+        }
+
+        const resetBtn = document.getElementById('resetBtn');
+
+        resetBtn.addEventListener('click', (e) => {
+            for (let i = 0; i < tictactoeClick.length; i++) {
+                tictactoeClick[i].innerHTML = '';
+                tictactoeClick[i].style.backgroundColor = 'white';
+                count = 1;
+            }
+        });
+
+        const box2 = document.getElementById('box2');
+
+        box2.addEventListener('click', e => {
+            console.dir(e);
+
+            // target : 이벤트가 발동한 객체
+            e.target.style.backgroundColor = 'violet';
+        });
+
+    </script>
+</body>
+</html>

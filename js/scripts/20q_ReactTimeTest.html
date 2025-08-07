@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ReactTimeTest </title>
+  <link rel="stylesheet" href="../assets/css/react_test.css">
+</head>
+<body>
+<h1>반응속도 테스트 - 프로게이머 평균 150ms</h1>
+  <div id="progress-bar">
+    <div class="progress-fill"></div>
+    <span class="progress-text">0 / 5</span>
+  </div>
+  <div id="main"></div>
+
+  <div id="test-wait" style="display: none;">
+    <div class="text">Wait...</div>
+  </div>
+
+  <div id="test-wait-click" style="display: none;">
+    <div class="text">Click!</div>
+  </div>
+
+  <div id="test-clicked" style="display: none;">
+    <div class="label">Your reaction time:</div>
+    <div class="record">
+      <span class="millisec">0ms</span>
+    </div>
+  </div>
+
+  <div id="test-record" style="display: none;">
+    <div class="title">Final Results</div>
+    <div class="records">
+      <div class="avg-time">
+        <div class="label">Average Time:</div>
+        <div class="millisec">0ms</div>
+      </div>
+      <div class="best-time">
+        <div class="label">Best Time:</div>
+        <div class="millisec">0ms</div>
+      </div>
+      <div class="worst-time">
+        <div class="label">Worst Time:</div>
+        <div class="millisec">0ms</div>
+      </div>
+    </div>
+    <div class="try-again-button">Try again</div>
+  </div>
+
+  <script src="../assets/js/react_test.js"></script>
+</body>
+</html>

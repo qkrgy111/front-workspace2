@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title># 이벤트 위임</title>
+    <style>
+        #box2, #box2 div {
+            padding : 15px;
+            border: solid 3px black;
+            min-height: 10px;
+            background-color: white;
+        }
+
+        #box3 div,[id^="box4"] {
+            padding : 0 15px;
+            border: solid 3px black;
+            min-height: 100px;
+            background-color: white;
+            margin: 15px 0;
+        }
+
+        .wrapper {
+            padding : 10px;
+            margin : 15px 0;
+            border: solid 1px black;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    
+    <h3># 이벤트 위임</h3>
+
+    <ul>
+        <li>기본적으로 부모 요소에 추가한 이벤트는 그 위에 눕혀있는 자식 요소에서도 발동한다</li>
+        <li>이벤트를 발생시킨 객체의 인스턴스가 어떤 요소에서 발생한 이벤트인지 이벤트 객체 내부의 target값으로 알 수 있다</li>
+    </ul>
+
+    <div id = "box2">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h3># 이벤트 버블링</h3>
+
+    <ul>
+        <li>중첩된 요소에서 이벤트가 발생했을 때 해당 이벤트가 자식 요소에서 부모 요소까지 전이되는 형상</li>
+        <li>target과 currentTarget을 사용해 버블링 이벤트 도중에
+            발생시키고 싶은 이벤트만 골라낼 수 있다
+        </li>
+    </ul>
+
+    <div id="box3">
+        <div id="box3-1">
+            <div id="box3-1-1"></div>
+        </div>
+    </div>
+
+    <h3># 이벤트 캡쳐링</h3>
+
+    <ul>
+        <li>버블링보다 먼저 일어나는 이벤트 처리 단계</li>
+        <li>버블링과는 반대로 부모 요소부터 자식 요소까지 전이되는 이벤트 처리 순서</li>
+        <li>기본적으로는 비활성화 되어있다</li>
+        <li>캡쳐링이 모두 진행되고 난 후에는 원래대로 버블링이 진행된다</li>
+    </ul>
+
+    <div id="box4">
+        <div id="box4-1">
+            <div id="box4-1-1"></div>
+            <div id="box4-1-2"></div>
+        </div>
+        <div id="box4-2"></div>
+    </div>
+
+    <h3># 요소의 기본 동작막기</h3>
+
+    <ul>
+        <li>어떤 요소들은 이벤트 발생전에 실행되는 기본 동작들이 있다</li>
+        <li>원하는 이벤트를 처리하기위해 기본 동작을 막아야 하는 경우들이 있다</li>
+    </ul>
+
+    <div class="wrapper">
+        <div>아이디를 입력하세요. 영어 소문자와 숫자만 사용할 수 있습니다.</div>
+
+        <input type="text" id="id-text-input">
+    </div>
+
+    <script>
+        //연습 1 : id가 tic-tac-toe인 요소 내부의 칸을 클릭할때마다 o와 x가 번갈아가면서
+        // ...만드러주세요 ( 단, 이미 o또는 x가 생성된 칸은 바꿀 수 없음)
+
+        // 연습2: 초기화 버튼을 누르면 모든 단계가 초기화되고 다시 클릭을 진행할 수 있게 만들어보세요
+        const box2 = document.getElementById('box2');
+
+        box2.addEventListener('click', e => {
+            console.log('clicked!', e);
+
+            // target: 이벤트가 발동한 객체
+            e.target.style.backgroundColor = 'violet';
+        });
+
+        const box3 = document.getElementById('box3');
+        const box3_1 = document.getElementById('box3-1');
+        const box3_1_1 = document.getElementById('box3-1-1');
+
+        box3.addEventListener('click', e=> {
+            // 이 이벤트를 발생시킨 곳 : target
+            // 이 이벤트가 달려있는 곳 : currentTarget
+            if (e.currentTarget != e.target) {
+                return;
+            }
+            // window.alert('제일 바깥쪽 요소가 클릭됨!');
+            console.log('alert: ', '제일 바깥족 박스가 클릭됨 !')
+            console.log(e);
+            e.target.style.backgroundColor = 'green';
+        });
+
+        box3_1.addEventListener('click', e => {
+            if (e.currentTarget != e.target) {
+                return;
+            }
+            // window.alert('중간 박스가 클릭됨!');
+            console.log('alert: ', '중간 박스가 클릭됨 !')
+            console.log(e);
+            e.target.style.backgroundColor = 'orange';
+        });
+
+        box3_1_1.addEventListener('click', e => {
+            if (e.currentTarget != e.target) {
+                return;
+            }
+            // window.alert('제일 안쪽 박스가 클릭됨 !');
+            console.log('alert:', '제일 안쪽 박스가 클릭됨!');
+            console.log('target', e.target);
+            console.log('currentTarget: ',e.currentTarget);
+            e.target.style.backgroundColor = 'red';
+        });
+
+        const box4 = document.getElementById('box4');
+        const box4_1 = document.getElementById('box4-1');
+        const box4_1_1 = document.getElementById('box4-1-1');
+        const box4_1_2 = document.getElementById('box4-1-2');
+        const box4_2 = document.getElementById('box4-2');
+
+        // addEventlistener의 3번째 파라미터를 true로 설정하면
+        // 캡쳐링 단계에서 해당 이벤트를 발생시키겠다고 설정하는 것이다
+        box4.addEventListener('click', e => {
+            console.log('capture box4', e);
+            // console.log('target: ', e.target);
+            // console.log('currentTarget', e.currentTarget);
+        }, true);
+
+        // 버블링 단계에서 발생시킬 이벤트 설정
+        box4_1.addEventListener('click', e=> {
+            console.log('capture box4_1', e);
+
+        });
+        
+
+        box4_1_1.addEventListener('click', e=> {
+            console.log('capture box4_1_1', e);
+        });
+
+        box4_1_2.addEventListener('click', e=> {
+            console.log('capture box4_1_2', e);
+
+        });
+
+        box4_2.addEventListener('click', e=> {
+            console.log('capture box4_2', e);
+
+        });
+
+        box4.addEventListener('click', e=> {
+            console.log('bubble box4', e);
+        });
+
+        box4_1.addEventListener('click', e=> {
+            console.log('bubble box4_1', e);
+        });
+
+        box4_1_1.addEventListener('click', e=> {
+            console.log('bubble box4_1_1', e);
+        });
+
+        box4_1_2.addEventListener('click', e=> {
+            console.log('bubble box4_1_2', e);
+        });
+
+        box4_2.addEventListener('click', e=> {
+            console.log('bubble box4_2', e);
+        });
+
+        const id_text_input = document.getElementById('id-text-input');
+
+        // num.toString() : 숫자 65를 '65'로 변경
+        // String.fromCharCode(num) : 숫자65를 해당 번호 문자 'A'로 변경
+        let num = 65;
+        console.log(String.fromCharCode(num) === 'A');
+
+        id_text_input.addEventListener('keypress', e => {
+            console.log(e.cancelable); // cancelable이 true인 이벤트만 preventDefault()를 실행할 수 있다
+            e.preventDefault(); // 해당 태그의 기본 동작을 취소시키는 메서드
+
+            const ch = String.fromCharCode(e.charCode);
+            console.log('방금 입력한 것 : ',ch);
+
+            if (!(ch <= '9' && ch >= '0' || ch >= 'a' && ch <= 'z')) {
+                window.alert('영어 소문자 또는 숫자만 입력하셔야 합니다 !!');
+            }
+        });
+        
+    </script>
+</body>
+</html>
